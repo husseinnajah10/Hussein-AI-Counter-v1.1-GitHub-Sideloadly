@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>CFBundleDisplayName</key><string>Hussein AI Counter</string>
+  <key>NSCameraUsageDescription</key><string>يستخدم التطبيق الكاميرا لعد الأشخاص داخل القاعة دون رفع الصور إلى الإنترنت.</string>
+  <key>NSPhotoLibraryUsageDescription</key><string>يسمح لك التطبيق باختيار صورة لتحليل عدد الأشخاص فيها على الجهاز.</string>
+  <key>UIRequiredDeviceCapabilities</key><array><string>arm64</string></array>
+  <key>UILaunchScreen</key><dict/>
+  <key>UISupportedInterfaceOrientations</key><array><string>UIInterfaceOrientationPortrait</string></array>
+</dict></plist>

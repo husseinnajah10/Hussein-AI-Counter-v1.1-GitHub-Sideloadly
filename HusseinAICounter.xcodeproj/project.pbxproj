@@ -1,0 +1,67 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A08011CEBF897F8E9D9D29A8 /* buildHusseinAICounterApp.swift */ = {isa = PBXBuildFile; fileRef = 32471ED1CDC6B8E1915C53C9 /* HusseinAICounterApp.swift */;};
+		4F6DC540E06BD9DBE842153D /* buildCountingHistory.swift */ = {isa = PBXBuildFile; fileRef = 1C3379F8A26BAA6D676639DE /* CountingHistory.swift */;};
+		7EA1E261337D8FCB5B1A7EB9 /* buildCameraCounter.swift */ = {isa = PBXBuildFile; fileRef = 6A0F2FBCA403AE239E1FDD69 /* CameraCounter.swift */;};
+		1FCBB97E1EEDEA208DAB3C61 /* buildHomeView.swift */ = {isa = PBXBuildFile; fileRef = 790FB8D9E62CD6B072E1143D /* HomeView.swift */;};
+		F62928A95683C252DA91C864 /* buildAssets */ = {isa = PBXBuildFile; fileRef = 64C544B620C42B91C39F9AC8 /* Assets.xcassets */;};
+		E5B9A647AC8E4F1B9382E116 /* buildSplashView.swift */ = {isa = PBXBuildFile; fileRef = FC1BB2164F234AB6A8933C91 /* SplashView.swift */;};
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		32471ED1CDC6B8E1915C53C9 /* refHusseinAICounterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HusseinAICounterApp.swift; sourceTree = "<group>";};
+		1C3379F8A26BAA6D676639DE /* refCountingHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingHistory.swift; sourceTree = "<group>";};
+		6A0F2FBCA403AE239E1FDD69 /* refCameraCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCounter.swift; sourceTree = "<group>";};
+		790FB8D9E62CD6B072E1143D /* refHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>";};
+		64C544B620C42B91C39F9AC8 /* refAssets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>";};
+		12EACEF54B4F9044BE2236D0 /* refInfo */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>";};
+		D5C34F4CEA46728E933C8FA4 /* refProduct */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HusseinAICounter.app; sourceTree = BUILT_PRODUCTS_DIR;};
+		FC1BB2164F234AB6A8933C91 /* refSplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>";};
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7561BFB015D8F536760CB671 /* frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0;};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F97E10D1020E3BEF961AF77B /* rootGroup */ = {isa = PBXGroup; children = (DB89E782D488330EABE72BF7 /* HusseinAICounter */, 17E1D4981A9DED075A3F8B48 /* Products */, ); sourceTree = "<group>";};
+		DB89E782D488330EABE72BF7 /* srcGroup */ = {isa = PBXGroup; children = (32471ED1CDC6B8E1915C53C9 /* HusseinAICounterApp.swift */, 1C3379F8A26BAA6D676639DE /* CountingHistory.swift */, 6A0F2FBCA403AE239E1FDD69 /* CameraCounter.swift */, 790FB8D9E62CD6B072E1143D /* HomeView.swift */, FC1BB2164F234AB6A8933C91 /* SplashView.swift */, 64C544B620C42B91C39F9AC8 /* Assets.xcassets */, 12EACEF54B4F9044BE2236D0 /* Info.plist */, ); path = HusseinAICounter; sourceTree = "<group>";};
+		17E1D4981A9DED075A3F8B48 /* productGroup */ = {isa = PBXGroup; children = (D5C34F4CEA46728E933C8FA4 /* HusseinAICounter.app */, ); name = Products; sourceTree = "<group>";};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0E8A3AD980EC179856012B7E /* target */ = {isa = PBXNativeTarget; buildConfigurationList = 73FE95FF3221A067C5EC019D /* Build configuration list for PBXNativeTarget "HusseinAICounter" */; buildPhases = (BCE16DD0260827ECF338C787 /* Sources */, 7561BFB015D8F536760CB671 /* Frameworks */, 0189424A5A60FED329FA868E /* Resources */, ); buildRules = (); dependencies = (); name = HusseinAICounter; productName = HusseinAICounter; productReference = D5C34F4CEA46728E933C8FA4 /* HusseinAICounter.app */; productType = "com.apple.product-type.application";};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		98F54143AB4E86B28C3AFEE0 /* project */ = {isa = PBXProject; attributes = { BuildIndependentTargetsInParallel = YES; LastUpgradeCheck = 1600; TargetAttributes = {0E8A3AD980EC179856012B7E = { CreatedOnToolsVersion = 16.0; }; }; }; buildConfigurationList = 5A01AB0805E300D44260EEA7 /* Build configuration list for PBXProject "HusseinAICounter" */; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base, ); mainGroup = F97E10D1020E3BEF961AF77B; productRefGroup = 17E1D4981A9DED075A3F8B48 /* Products */; projectDirPath = ""; projectRoot = ""; targets = (0E8A3AD980EC179856012B7E /* HusseinAICounter */, );};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0189424A5A60FED329FA868E /* resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (F62928A95683C252DA91C864 /* Assets.xcassets in Resources */, ); runOnlyForDeploymentPostprocessing = 0;};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BCE16DD0260827ECF338C787 /* sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A08011CEBF897F8E9D9D29A8 /* HusseinAICounterApp.swift in Sources */, 4F6DC540E06BD9DBE842153D /* CountingHistory.swift in Sources */, 7EA1E261337D8FCB5B1A7EB9 /* CameraCounter.swift in Sources */, 1FCBB97E1EEDEA208DAB3C61 /* HomeView.swift in Sources */, ); runOnlyForDeploymentPostprocessing = 0;};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D08DD63EED508AD30D0CB0B4 /* projDebug */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; DEBUG_INFORMATION_FORMAT = dwarf; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; }; name = Debug;};
+		7082CC0B6FC1282FCEABD07A /* targetDebug */ = {isa = XCBuildConfiguration; buildSettings = { ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 2; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = HusseinAICounter/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.1; PRODUCT_BUNDLE_IDENTIFIER = com.husseinnajah.HusseinAICounter; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; SUPPORTS_MACCATALYST = NO; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; }; name = Debug;};
+		811CB99F7A296F7846C18A7F /* projRelease */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym"; SWIFT_COMPILATION_MODE = wholemodule; }; name = Release;};
+		639A7CA24D39909E713B47F7 /* targetRelease */ = {isa = XCBuildConfiguration; buildSettings = { ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 2; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = HusseinAICounter/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.1; PRODUCT_BUNDLE_IDENTIFIER = com.husseinnajah.HusseinAICounter; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; SUPPORTS_MACCATALYST = NO;  }; name = Release;};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5A01AB0805E300D44260EEA7 /* configProjectList */ = {isa = XCConfigurationList; buildConfigurations = (D08DD63EED508AD30D0CB0B4 /* Debug */, 811CB99F7A296F7846C18A7F /* Release */, ); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;};
+		73FE95FF3221A067C5EC019D /* configTargetList */ = {isa = XCConfigurationList; buildConfigurations = (7082CC0B6FC1282FCEABD07A /* Debug */, 639A7CA24D39909E713B47F7 /* Release */, ); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;};
+/* End XCConfigurationList section */
+	};
+	rootObject = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+}

@@ -1,0 +1,63 @@
+name: Build Hussein AI Counter IPA (unsigned)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+jobs:
+  build-unsigned-ipa:
+    runs-on: macos-15
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Validate project and assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          plutil -lint HusseinAICounter/Info.plist
+          test -s HusseinAICounter/Assets.xcassets/AppIcon.appiconset/AppIcon.png
+          xcodebuild -list -project HusseinAICounter.xcodeproj
+
+      - name: Build iPhone app without signing
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -project HusseinAICounter.xcodeproj \
+            -scheme HusseinAICounter \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -sdk iphoneos \
+            -derivedDataPath "$RUNNER_TEMP/DerivedData" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY='' \
+            build
+
+      - name: Package app into unsigned IPA
+        shell: bash
+        run: |
+          set -euo pipefail
+          APP="$RUNNER_TEMP/DerivedData/Build/Products/Release-iphoneos/HusseinAICounter.app"
+          test -d "$APP" || { echo "App bundle not found: $APP"; exit 1; }
+          mkdir -p "$RUNNER_TEMP/IPA/Payload"
+          cp -R "$APP" "$RUNNER_TEMP/IPA/Payload/"
+          cd "$RUNNER_TEMP/IPA"
+          zip -qry "$GITHUB_WORKSPACE/HusseinAICounter-unsigned.ipa" Payload
+          test -s "$GITHUB_WORKSPACE/HusseinAICounter-unsigned.ipa"
+
+      - name: Upload IPA for Windows sideloading
+        uses: actions/upload-artifact@v4
+        with:
+          name: HusseinAICounter-unsigned-IPA
+          path: HusseinAICounter-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 7
