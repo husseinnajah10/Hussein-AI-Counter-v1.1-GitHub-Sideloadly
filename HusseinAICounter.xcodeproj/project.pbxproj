@@ -48,7 +48,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		BCE16DD0260827ECF338C787 /* sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A08011CEBF897F8E9D9D29A8 /* HusseinAICounterApp.swift in Sources */, 4F6DC540E06BD9DBE842153D /* CountingHistory.swift in Sources */, 7EA1E261337D8FCB5B1A7EB9 /* CameraCounter.swift in Sources */, 1FCBB97E1EEDEA208DAB3C61 /* HomeView.swift in Sources */, ); runOnlyForDeploymentPostprocessing = 0;};
+		BCE16DD0260827ECF338C787 /* sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A08011CEBF897F8E9D9D29A8 /* HusseinAICounterApp.swift in Sources */, 4F6DC540E06BD9DBE842153D /* CountingHistory.swift in Sources */, 7EA1E261337D8FCB5B1A7EB9 /* CameraCounter.swift in Sources */, 1FCBB97E1EEDEA208DAB3C61 /* HomeView.swift in Sources */, E5B9A647AC8E4F1B9382E116 /* SplashView.swift in Sources */, ); runOnlyForDeploymentPostprocessing = 0;};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
