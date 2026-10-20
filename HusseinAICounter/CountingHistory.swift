@@ -17,11 +17,24 @@ struct DailyCount: Identifiable {
     var id: Date { date }
 }
 
+struct LiveObservation: Codable {
+    let timestamp: Date
+    let count: Int
+    let faces: Int
+}
+
 final class CountingHistory: ObservableObject {
     @Published private(set) var records: [CountingRecord] = []
+    // Same key as versions 1/2: existing lesson logs survive normal updates.
     private let key = "HusseinAICounter.CountingHistory.v1"
+    private let observationKey = "StudentAICounter.latestDetection.v3"
+    @Published private(set) var latestObservation: LiveObservation?
+    private var lastObservationWrite: Date = .distantPast
 
     init() {
+        if let data = UserDefaults.standard.data(forKey: observationKey) {
+            latestObservation = try? JSONDecoder().decode(LiveObservation.self, from: data)
+        }
         guard let data = UserDefaults.standard.data(forKey: key),
               let saved = try? JSONDecoder().decode([CountingRecord].self, from: data) else { return }
         records = saved
@@ -49,6 +62,18 @@ final class CountingHistory: ObservableObject {
            Date().timeIntervalSince(mostRecentAuto.timestamp) < 20 { return false }
         add(count, mode: mode, lectureTitle: normalized)
         return true
+    }
+
+    /// Records the latest detection locally about once per 0.8 seconds;
+    /// this is separate from the permanent lecture history and stores no photo.
+    func updateLiveObservation(count: Int, faces: Int, timestamp: Date) {
+        guard timestamp.timeIntervalSince(lastObservationWrite) >= 0.8 else { return }
+        let sample = LiveObservation(timestamp: timestamp, count: max(0, count), faces: max(0, faces))
+        latestObservation = sample
+        lastObservationWrite = timestamp
+        if let data = try? JSONEncoder().encode(sample) {
+            UserDefaults.standard.set(data, forKey: observationKey)
+        }
     }
 
     func removeAll() {

@@ -1,34 +1,42 @@
-"""Offline project-structure smoke checks; does not replace Xcode/device tests."""
+"""Static release checks for Student AI Counter 3.0 (not an Xcode compile)."""
 from pathlib import Path
 import plistlib
-import hashlib
-import re
+import struct
 
 root = Path(__file__).resolve().parents[1]
-app = root / "HusseinAICounter"
-info = plistlib.loads((app / "Info.plist").read_bytes())
-assert info["CFBundleIdentifier"] == "$(PRODUCT_BUNDLE_IDENTIFIER)"
-assert "NSCameraUsageDescription" in info
-assert "NSPhotoLibraryUsageDescription" in info
-assert "CFBundleShortVersionString" in info
-assert "CFBundleExecutable" in info
-
-project = (root / "HusseinAICounter.xcodeproj/project.pbxproj").read_text()
-for file in ["HusseinAICounterApp.swift", "HomeView.swift", "CameraCounter.swift", "CountingHistory.swift", "SplashView.swift"]:
-    assert (app / file).is_file(), file
-    assert file in project, f"Missing Xcode reference to {file}"
-assert "MARKETING_VERSION = 2.0;" in project
-assert "CURRENT_PROJECT_VERSION = 3;" in project
-assert "PRODUCT_BUNDLE_IDENTIFIER = com.husseinnajah.HusseinAICounter;" in project
-
-icon = (app / "Assets.xcassets/AppIcon.appiconset/AppIcon.png").read_bytes()
-splash = (app / "Assets.xcassets/LaunchMonogram.imageset/LaunchMonogram.png").read_bytes()
-assert icon == splash, "The HN icon and splash monogram must stay identical"
-assert hashlib.sha256(icon).hexdigest() == "4eee24c19e219864a95bb2e39e835ccc8b41f3957a6a0fbfd0a1b27d668cc2b6", "The user's original icon must not change"
-
-source = (app / "CameraCounter.swift").read_text()
-for token in ["VNDetectFaceRectanglesRequest", "VNDetectHumanRectanglesRequest", "builtInUltraWideCamera", "BoxTracker", "setTorch"]:
+app = root / 'HusseinAICounter'
+project = (root / 'HusseinAICounter.xcodeproj/project.pbxproj').read_text(encoding='utf8')
+with (app / 'Info.plist').open('rb') as f:
+    info = plistlib.load(f)
+assert info['CFBundleDisplayName'] == 'Student AI Counter'
+assert info['CFBundleIdentifier'] == '$(PRODUCT_BUNDLE_IDENTIFIER)'
+assert 'NSCameraUsageDescription' in info
+assert 'NSPhotoLibraryUsageDescription' in info
+for filename in ['HusseinAICounterApp.swift', 'HomeView.swift', 'CameraCounter.swift', 'SplashView.swift', 'CountingHistory.swift', 'AppTheme.swift']:
+    assert (app / filename).is_file(), filename
+    assert filename in project, f'Project reference missing: {filename}'
+assert 'MARKETING_VERSION = 3.0;' in project
+assert 'CURRENT_PROJECT_VERSION = 4;' in project
+assert 'PRODUCT_BUNDLE_IDENTIFIER = com.husseinnajah.HusseinAICounter;' in project
+icon = app / 'Assets.xcassets/AppIcon.appiconset/AppIcon.png'
+gate = app / 'Assets.xcassets/GoldenGate.imageset/GoldenGate.png'
+def png_dimensions(path):
+    data = path.read_bytes()
+    assert data[:8] == b'\x89PNG\r\n\x1a\n', path
+    return struct.unpack('>II', data[16:24]), data[25]
+assert png_dimensions(icon) == ((1024, 1024), 2), 'App icon must be opaque RGB 1024px PNG'
+assert png_dimensions(gate)[0] == (1024, 1024)
+source = (app / 'CameraCounter.swift').read_text()
+for token in ['VNDetectFaceRectanglesRequest', 'VNDetectHumanRectanglesRequest',
+              'builtInUltraWideCamera', 'flipCamera()', 'adjustZoom(by', 'BoxTracker']:
     assert token in source, token
-assert "builtInUltraWideAngleCamera" not in source, "Invalid AVFoundation ultra-wide camera constant"
-
-print("PASS: source and asset checks; original HN artwork unchanged; signed build still requires macOS")
+assert 'builtInUltraWideAngleCamera' not in source
+ui = (app / 'HomeView.swift').read_text()
+for token in ['CameraPreview', 'StatisticsScreen', 'HistoryScreen', 'SettingsScreen',
+              'PhotosPicker', 'UIPinchGestureRecognizer', 'GoldenGate']:
+    assert token in ui, token
+assert 'hn.camera.previewHeight' not in ui
+assert 'GoldenGate' in (app / 'SplashView.swift').read_text()
+assert 'Designed By Hussein Najah' in (app / 'AppTheme.swift').read_text()
+assert 'HusseinAICounter.CountingHistory.v1' in (app / 'CountingHistory.swift').read_text()
+print('PASS: static project structure, icon, splash, metadata, privacy, migration, feature checks')

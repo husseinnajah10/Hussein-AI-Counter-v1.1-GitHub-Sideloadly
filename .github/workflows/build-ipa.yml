@@ -1,4 +1,4 @@
-name: Build Hussein AI Counter IPA (unsigned)
+name: Build Student AI Counter IPA (unsigned)
 
 on:
   workflow_dispatch:
@@ -58,9 +58,12 @@ jobs:
           BUNDLE_ID=$(plutil -extract CFBundleIdentifier raw -o - "$APP/Info.plist")
           echo "Bundle identifier: $BUNDLE_ID"
           test "$BUNDLE_ID" = 'com.husseinnajah.HusseinAICounter'
+          DISPLAY_NAME=$(plutil -extract CFBundleDisplayName raw -o - "$APP/Info.plist")
+          echo "Display name: $DISPLAY_NAME"
+          test "$DISPLAY_NAME" = 'Student AI Counter'
           VERSION=$(plutil -extract CFBundleShortVersionString raw -o - "$APP/Info.plist")
           echo "App version: $VERSION"
-          test "$VERSION" = '2.0'
+          test "$VERSION" = '3.0'
 
       - name: Package app into unsigned IPA
         shell: bash
@@ -76,7 +79,7 @@ jobs:
       - name: Upload IPA for Windows sideloading
         uses: actions/upload-artifact@v4
         with:
-          name: HusseinAICounter-v2.0-unsigned-IPA
+          name: StudentAICounter-v3.0-unsigned-IPA
           path: HusseinAICounter-unsigned.ipa
           if-no-files-found: error
           retention-days: 7

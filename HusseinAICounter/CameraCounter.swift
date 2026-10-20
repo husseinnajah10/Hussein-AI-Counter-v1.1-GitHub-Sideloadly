@@ -183,6 +183,8 @@ final class CameraCounter: NSObject, ObservableObject, AVCaptureVideoDataOutputS
     @Published private(set) var zoomFactor: CGFloat = 1
     @Published private(set) var maxZoomFactor: CGFloat = 5
     @Published private(set) var selectedLens: CameraLens = .wide
+    @Published private(set) var cameraPosition: AVCaptureDevice.Position = .back
+    @Published private(set) var latestDetectionAt = Date.distantPast
     @Published private(set) var torchEnabled = false
     @Published private(set) var supportsTorch = false
     @Published private(set) var videoAspectRatio: CGFloat = 9.0 / 16.0
@@ -213,7 +215,8 @@ final class CameraCounter: NSObject, ObservableObject, AVCaptureVideoDataOutputS
         }
     }
 
-    private func chosenDevice(for lens: CameraLens) -> AVCaptureDevice? {
+    private func chosenDevice(for lens: CameraLens, position: AVCaptureDevice.Position = .back) -> AVCaptureDevice? {
+        if position == .front { return AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) }
         if lens == .ultraWide {
             return AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInUltraWideCamera],
                    mediaType: .video, position: .back).devices.first
@@ -276,6 +279,7 @@ final class CameraCounter: NSObject, ObservableObject, AVCaptureVideoDataOutputS
     private func publishDeviceState(_ device: AVCaptureDevice, lens: CameraLens) {
         DispatchQueue.main.async {
             self.selectedLens = lens
+            self.cameraPosition = device.position
             self.zoomFactor = 1
             self.maxZoomFactor = max(1, min(device.activeFormat.videoMaxZoomFactor, 5))
             self.supportsTorch = device.hasTorch
@@ -309,6 +313,7 @@ final class CameraCounter: NSObject, ObservableObject, AVCaptureVideoDataOutputS
     func setLens(_ lens: CameraLens) {
         sessionQueue.async { [weak self] in
             guard let self, self.isConfigured,
+                  self.input?.device.position == .back,
                   let device = self.chosenDevice(for: lens),
                   let newInput = try? AVCaptureDeviceInput(device: device) else { return }
             if self.input?.device.uniqueID == device.uniqueID { return }
@@ -327,6 +332,52 @@ final class CameraCounter: NSObject, ObservableObject, AVCaptureVideoDataOutputS
             self.session.commitConfiguration()
             self.visionQueue.async { self.tracker.reset(); self.lastDetectionTime = 0 }
             self.publishDeviceState(device, lens: lens)
+        }
+    }
+
+    /// Swap the physical front/back camera while keeping the same session,
+    /// so the app does not need to rebuild its preview or lose its history.
+    func flipCamera() {
+        sessionQueue.async { [weak self] in
+            guard let self, self.isConfigured else { return }
+            let newPosition: AVCaptureDevice.Position = self.input?.device.position == .front ? .back : .front
+            guard let device = self.chosenDevice(for: .wide, position: newPosition),
+                  let newInput = try? AVCaptureDeviceInput(device: device) else { return }
+            self.session.beginConfiguration()
+            let oldInput = self.input
+            if let oldInput { self.session.removeInput(oldInput) }
+            guard self.session.canAddInput(newInput) else {
+                if let oldInput { self.session.addInput(oldInput) }
+                self.session.commitConfiguration()
+                DispatchQueue.main.async { self.errorMessage = "Cannot switch camera / تعذر تبديل الكاميرا" }
+                return
+            }
+            self.session.addInput(newInput)
+            self.input = newInput
+            self.configurePhotoQuality(for: device)
+            self.session.commitConfiguration()
+            if let connection = self.frameOutput.connection(with: .video), connection.isVideoMirroringSupported {
+                connection.automaticallyAdjustsVideoMirroring = false
+                connection.isVideoMirrored = false
+            }
+            self.visionQueue.async { self.tracker.reset(); self.lastDetectionTime = 0 }
+            self.publishDeviceState(device, lens: .wide)
+        }
+    }
+
+    /// Accept relative pinch increments. Read actual hardware zoom on sessionQueue
+    /// rather than a possibly stale @Published value.
+    func adjustZoom(by factor: CGFloat) {
+        sessionQueue.async { [weak self] in
+            guard let self, let device = self.input?.device else { return }
+            let target = max(1, min(device.videoZoomFactor * factor,
+                                    min(device.activeFormat.videoMaxZoomFactor, 5)))
+            do {
+                try device.lockForConfiguration()
+                device.videoZoomFactor = target
+                device.unlockForConfiguration()
+                DispatchQueue.main.async { self.zoomFactor = target }
+            } catch { }
         }
     }
 
@@ -386,7 +437,7 @@ final class CameraCounter: NSObject, ObservableObject, AVCaptureVideoDataOutputS
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         let now = CACurrentMediaTime()
-        guard now - lastDetectionTime >= 0.42,
+        guard now - lastDetectionTime >= 0.28,
               let buffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         lastDetectionTime = now
         // Portrait output rotation above -> Vision .up. Fallback for other
@@ -405,6 +456,7 @@ final class CameraCounter: NSObject, ObservableObject, AVCaptureVideoDataOutputS
                 self.count = stableBoxes.count
                 self.facesDetected = stableBoxes.filter { $0.kind == .face }.count
                 self.videoAspectRatio = aspect
+                self.latestDetectionAt = Date()
             }
         } catch { /* Retain previous count on an occasional invalid frame. */ }
     }

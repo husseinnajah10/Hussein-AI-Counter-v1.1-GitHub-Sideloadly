@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Hussein AI Counter</string>
+	<string>Student AI Counter</string>
 	<key>NSCameraUsageDescription</key>
 	<string>يستخدم التطبيق الكاميرا لعد الأشخاص داخل القاعة دون رفع الصور إلى الإنترنت.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

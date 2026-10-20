@@ -12,6 +12,7 @@
 		1FCBB97E1EEDEA208DAB3C61 /* buildHomeView.swift */ = {isa = PBXBuildFile; fileRef = 790FB8D9E62CD6B072E1143D /* HomeView.swift */;};
 		F62928A95683C252DA91C864 /* buildAssets */ = {isa = PBXBuildFile; fileRef = 64C544B620C42B91C39F9AC8 /* Assets.xcassets */;};
 		E5B9A647AC8E4F1B9382E116 /* buildSplashView.swift */ = {isa = PBXBuildFile; fileRef = FC1BB2164F234AB6A8933C91 /* SplashView.swift */;};
+		A373AAABBBCCDD1122334455 /* buildAppTheme.swift */ = {isa = PBXBuildFile; fileRef = A373AAABBBCCDD1122334456 /* AppTheme.swift */;};
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		12EACEF54B4F9044BE2236D0 /* refInfo */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>";};
 		D5C34F4CEA46728E933C8FA4 /* refProduct */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HusseinAICounter.app; sourceTree = BUILT_PRODUCTS_DIR;};
 		FC1BB2164F234AB6A8933C91 /* refSplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>";};
+		A373AAABBBCCDD1122334456 /* refAppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>";};
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,7 +33,7 @@
 
 /* Begin PBXGroup section */
 		F97E10D1020E3BEF961AF77B /* rootGroup */ = {isa = PBXGroup; children = (DB89E782D488330EABE72BF7 /* HusseinAICounter */, 17E1D4981A9DED075A3F8B48 /* Products */, ); sourceTree = "<group>";};
-		DB89E782D488330EABE72BF7 /* srcGroup */ = {isa = PBXGroup; children = (32471ED1CDC6B8E1915C53C9 /* HusseinAICounterApp.swift */, 1C3379F8A26BAA6D676639DE /* CountingHistory.swift */, 6A0F2FBCA403AE239E1FDD69 /* CameraCounter.swift */, 790FB8D9E62CD6B072E1143D /* HomeView.swift */, FC1BB2164F234AB6A8933C91 /* SplashView.swift */, 64C544B620C42B91C39F9AC8 /* Assets.xcassets */, 12EACEF54B4F9044BE2236D0 /* Info.plist */, ); path = HusseinAICounter; sourceTree = "<group>";};
+		DB89E782D488330EABE72BF7 /* srcGroup */ = {isa = PBXGroup; children = (32471ED1CDC6B8E1915C53C9 /* HusseinAICounterApp.swift */, 1C3379F8A26BAA6D676639DE /* CountingHistory.swift */, 6A0F2FBCA403AE239E1FDD69 /* CameraCounter.swift */, 790FB8D9E62CD6B072E1143D /* HomeView.swift */, FC1BB2164F234AB6A8933C91 /* SplashView.swift */, A373AAABBBCCDD1122334456 /* AppTheme.swift */, 64C544B620C42B91C39F9AC8 /* Assets.xcassets */, 12EACEF54B4F9044BE2236D0 /* Info.plist */, ); path = HusseinAICounter; sourceTree = "<group>";};
 		17E1D4981A9DED075A3F8B48 /* productGroup */ = {isa = PBXGroup; children = (D5C34F4CEA46728E933C8FA4 /* HusseinAICounter.app */, ); name = Products; sourceTree = "<group>";};
 /* End PBXGroup section */
 
@@ -48,14 +50,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		BCE16DD0260827ECF338C787 /* sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A08011CEBF897F8E9D9D29A8 /* HusseinAICounterApp.swift in Sources */, 4F6DC540E06BD9DBE842153D /* CountingHistory.swift in Sources */, 7EA1E261337D8FCB5B1A7EB9 /* CameraCounter.swift in Sources */, 1FCBB97E1EEDEA208DAB3C61 /* HomeView.swift in Sources */, E5B9A647AC8E4F1B9382E116 /* SplashView.swift in Sources */, ); runOnlyForDeploymentPostprocessing = 0;};
+		BCE16DD0260827ECF338C787 /* sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A08011CEBF897F8E9D9D29A8 /* HusseinAICounterApp.swift in Sources */, 4F6DC540E06BD9DBE842153D /* CountingHistory.swift in Sources */, 7EA1E261337D8FCB5B1A7EB9 /* CameraCounter.swift in Sources */, 1FCBB97E1EEDEA208DAB3C61 /* HomeView.swift in Sources */, E5B9A647AC8E4F1B9382E116 /* SplashView.swift in Sources */, A373AAABBBCCDD1122334455 /* AppTheme.swift in Sources */, ); runOnlyForDeploymentPostprocessing = 0;};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		D08DD63EED508AD30D0CB0B4 /* projDebug */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; DEBUG_INFORMATION_FORMAT = dwarf; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; }; name = Debug;};
-		7082CC0B6FC1282FCEABD07A /* targetDebug */ = {isa = XCBuildConfiguration; buildSettings = { ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 3; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = HusseinAICounter/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 2.0; PRODUCT_BUNDLE_IDENTIFIER = com.husseinnajah.HusseinAICounter; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; SUPPORTS_MACCATALYST = NO; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; }; name = Debug;};
+		7082CC0B6FC1282FCEABD07A /* targetDebug */ = {isa = XCBuildConfiguration; buildSettings = { ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 4; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = HusseinAICounter/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 3.0; PRODUCT_BUNDLE_IDENTIFIER = com.husseinnajah.HusseinAICounter; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; SUPPORTS_MACCATALYST = NO; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; }; name = Debug;};
 		811CB99F7A296F7846C18A7F /* projRelease */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym"; SWIFT_COMPILATION_MODE = wholemodule; }; name = Release;};
-		639A7CA24D39909E713B47F7 /* targetRelease */ = {isa = XCBuildConfiguration; buildSettings = { ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 3; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = HusseinAICounter/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 2.0; PRODUCT_BUNDLE_IDENTIFIER = com.husseinnajah.HusseinAICounter; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; SUPPORTS_MACCATALYST = NO;  }; name = Release;};
+		639A7CA24D39909E713B47F7 /* targetRelease */ = {isa = XCBuildConfiguration; buildSettings = { ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 4; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = HusseinAICounter/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 3.0; PRODUCT_BUNDLE_IDENTIFIER = com.husseinnajah.HusseinAICounter; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; SUPPORTS_MACCATALYST = NO;  }; name = Release;};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
