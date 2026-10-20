@@ -188,7 +188,7 @@ final class CameraCounter: NSObject, ObservableObject, AVCaptureVideoDataOutputS
     @Published private(set) var videoAspectRatio: CGFloat = 9.0 / 16.0
 
     let supportsUltraWide: Bool = AVCaptureDevice.DiscoverySession(
-        deviceTypes: [.builtInUltraWideAngleCamera], mediaType: .video, position: .back
+        deviceTypes: [.builtInUltraWideCamera], mediaType: .video, position: .back
     ).devices.first != nil
 
     private let sessionQueue = DispatchQueue(label: "hn.camera.session")
@@ -215,7 +215,7 @@ final class CameraCounter: NSObject, ObservableObject, AVCaptureVideoDataOutputS
 
     private func chosenDevice(for lens: CameraLens) -> AVCaptureDevice? {
         if lens == .ultraWide {
-            return AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInUltraWideAngleCamera],
+            return AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInUltraWideCamera],
                    mediaType: .video, position: .back).devices.first
         }
         return AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)

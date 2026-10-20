@@ -27,7 +27,8 @@ assert icon == splash, "The HN icon and splash monogram must stay identical"
 assert hashlib.sha256(icon).hexdigest() == "4eee24c19e219864a95bb2e39e835ccc8b41f3957a6a0fbfd0a1b27d668cc2b6", "The user's original icon must not change"
 
 source = (app / "CameraCounter.swift").read_text()
-for token in ["VNDetectFaceRectanglesRequest", "VNDetectHumanRectanglesRequest", "builtInUltraWideAngleCamera", "BoxTracker", "setTorch"]:
+for token in ["VNDetectFaceRectanglesRequest", "VNDetectHumanRectanglesRequest", "builtInUltraWideCamera", "BoxTracker", "setTorch"]:
     assert token in source, token
+assert "builtInUltraWideAngleCamera" not in source, "Invalid AVFoundation ultra-wide camera constant"
 
 print("PASS: source and asset checks; original HN artwork unchanged; signed build still requires macOS")
